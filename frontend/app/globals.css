@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 215 20.2% 65.1%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --ring: 216 34% 17%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-white;
+  }
+
+  /* Global text styles - ENFORCED GLOBALLY */
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-bold;
+  }
+
+  p, span, div, label, a, button, input, textarea, select {
+    @apply text-white !important;
+  }
+
+  /* Remove all default text colors - FORCE WHITE */
+  .text-foreground, .text-muted-foreground, .text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700, .text-destructive,
+  .text-gray-800, .text-gray-900, .text-slate-800, .text-slate-900, .text-zinc-800, .text-zinc-900 {
+    color: #ffffff !important;
+  }
+
+  /* Ensure all headings are bold and large */
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-bold;
+  }
+
+  /* Center all text by default */
+  body, div, p, span, section, main, article, aside, header, footer {
+    text-align: center;
+  }
+}
+
+@layer utilities {
+  .animate-shine {
+    position: relative;
+    animation: shine 2s infinite linear;
+  }
+
+  .animate-glitter {
+    position: relative;
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6, #1E3A8A);
+    background-size: 300% 300%;
+    animation: glitter 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes glitter {
+    0% {
+      background-position: 0% 50%;
+      transform: scale(1);
+    }
+    50% {
+      background-position: 100% 50%;
+      transform: scale(1.02);
+    }
+    100% {
+      background-position: 0% 50%;
+      transform: scale(1);
+    }
+  }
+}
