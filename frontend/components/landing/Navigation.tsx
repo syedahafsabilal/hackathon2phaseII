@@ -14,7 +14,7 @@ export const Navigation = ({ isMenuOpen, setIsMenuOpen }: NavigationProps) => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 bg-primary rounded-full"></div>
-          <span className="text-xl font-bold text-white">TodoApp</span>
+          <span className="text-xl font-bold text-white">TodoAppX</span>
         </div>
 
 

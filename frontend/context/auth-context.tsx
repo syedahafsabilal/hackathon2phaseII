@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { login as apiLogin, register as apiRegister } from '../lib/api';
 
 interface User {
   id: string;
@@ -11,8 +12,8 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<string | null>;
+  register: (name: string, email: string, password: string) => Promise<string | null>;
   logout: () => void;
   loading: boolean;
 }
@@ -24,7 +25,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in on initial load
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
@@ -36,57 +36,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<string | null> => {
     setLoading(true);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Mock authentication - in a real app, this would be an API call
-    if (email && password) {
-      const mockUser: User = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-      };
-
-      setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
+    try {
+      const data = await apiLogin(email, password);
+      const loggedInUser: User = { id: data.id, email: data.email, name: data.name };
+      setUser(loggedInUser);
+      localStorage.setItem('user', JSON.stringify(loggedInUser));
+      localStorage.setItem('token', data.token);
       setLoading(false);
-      return true;
+      return null;
+    } catch (error) {
+      console.error('Login failed:', error);
+      setLoading(false);
+      return error instanceof Error ? error.message : 'Login failed. Please try again.';
     }
-
-    setLoading(false);
-    return false;
   };
 
-  const register = async (name: string, email: string, password: string): Promise<boolean> => {
+  const register = async (name: string, email: string, password: string): Promise<string | null> => {
     setLoading(true);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Mock registration - in a real app, this would be an API call
-    if (name && email && password) {
-      const mockUser: User = {
-        id: Date.now().toString(),
-        email,
-        name,
-      };
-
-      setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
+    try {
+      const data = await apiRegister(name, email, password);
+      const registeredUser: User = { id: data.id, email: data.email, name: data.name };
+      setUser(registeredUser);
+      localStorage.setItem('user', JSON.stringify(registeredUser));
+      localStorage.setItem('token', data.token);
       setLoading(false);
-      return true;
+      return null;
+    } catch (error) {
+      console.error('Registration failed:', error);
+      setLoading(false);
+      return error instanceof Error ? error.message : 'Registration failed. Please try again.';
     }
-
-    setLoading(false);
-    return false;
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   const value = {

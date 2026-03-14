@@ -104,7 +104,7 @@ export const EditTaskModal = ({ isOpen, onClose, task, onSave }: EditTaskModalPr
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="title" className="block text-sm font-medium !text-white mb-1" style={{ color: 'white' }}>
             Title *
           </label>
           <Input
@@ -121,7 +121,7 @@ export const EditTaskModal = ({ isOpen, onClose, task, onSave }: EditTaskModalPr
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-foreground mb-1">
+          <label htmlFor="description" className="block text-sm font-medium !text-white mb-1" style={{ color: 'white' }}>
             Description
           </label>
           <Textarea
