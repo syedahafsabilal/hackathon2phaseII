@@ -1,0 +1,8 @@
+Collecting uvicorn
+  Using cached uvicorn-0.41.0-py3-none-any.whl.metadata (6.7 kB)
+Collecting fastapi
+  Using cached fastapi-0.135.1-py3-none-any.whl.metadata (30 kB)
+Collecting sqlalchemy
+  Downloading sqlalchemy-2.0.48-cp311-cp311-win_amd64.whl.metadata (9.8 kB)
+Collecting pydantic
+  Using cached pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
